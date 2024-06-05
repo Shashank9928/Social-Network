@@ -1,6 +1,5 @@
 from rest_framework import serializers
-from rest_framework.authtoken.models import Token
-from .models import SocialUser
+from .models import SocialUser, FriendRequest
 
 class SocialUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -21,3 +20,17 @@ class SocialUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = SocialUser
         fields = ['id', 'email', 'name', 'phone']
+        
+        
+class SocialUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SocialUser
+        fields = ['id', 'email', 'name', 'phone']
+
+class FriendRequestSerializer(serializers.ModelSerializer):
+    from_user = serializers.ReadOnlyField(source='from_user.email')
+    to_user = serializers.ReadOnlyField(source='to_user.email')
+
+    class Meta:
+        model = FriendRequest
+        fields = ['id', 'from_user', 'to_user', 'timestamp', 'status']
