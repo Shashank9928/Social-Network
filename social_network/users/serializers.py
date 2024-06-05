@@ -16,3 +16,8 @@ class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField()
 
+
+class SocialUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SocialUser
+        fields = ['id', 'email', 'name', 'phone']
